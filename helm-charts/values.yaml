@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: rajputmarch2020/cart
+  pullPolicy: Always
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 1004
+  targetport: 1004
+  name: cart
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
