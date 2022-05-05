@@ -103,6 +103,18 @@ pipeline{
                 }
             }
         }
+
+        stage("Deploy to Kubernetes cluster"){
+            steps{
+                script{
+                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+                        dir("helm-charts/"){
+                            sh 'helm upgrade --install --set image.repository="rajputmarch2020/cart" --set image.tag="${GIT_COMMIT_HASH}" cart cart/ ' 
+                        }
+                    }
+                }
+            }
+        }
     }
 
     post{
